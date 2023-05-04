@@ -1,41 +1,43 @@
 import React from "react";
-import { Image } from "react-native";
+import { Image, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Favorites from "../screens/Favorites";
+import FavoriteNavigation from "./FavoriteNavigation";
 import PokedexNavigation from "./PokedexNavigation";
-import Account from "../screens/Account";
+import AccountNavigation from "./AccountNavigation";
 
 const Tab = createBottomTabNavigator();
 
 export default function Navigation() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName="Pokedex1">
       <Tab.Screen
-        name="FAVORITE"
-        component={Favorites}
+        name="Favorite1"
+        component={FavoriteNavigation}
         options={{
-          tabBarLabel: "Favoritos",
+          title: "Favoritos",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="bookmarks-outline" color={color} size={size} />
+            <Ionicons name="heart" color={color} size={size} />
           ),
         }}
       />
+
       <Tab.Screen
-        name="POKEMON"
+        name="Pokedex1"
         component={PokedexNavigation}
         options={{
-          title: "",
-          headerTransparent: false,
           tabBarLabel: "",
-          tabBarIcon: () => rendePokeball(),
+          tabBarIcon: () => renderPokeball(),
         }}
       />
+
       <Tab.Screen
-        name="ACCOUNT"
-        component={Account}
+        name="Account1"
+        component={AccountNavigation}
         options={{
-          tabBarLabel: "Mi Cuenta",
+          tabBarLabel: "Mi cuenta",
+          title: "",
+          headerTransparent: true,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" color={color} size={size} />
           ),
@@ -45,11 +47,11 @@ export default function Navigation() {
   );
 }
 
-function rendePokeball() {
+function renderPokeball() {
   return (
     <Image
-      source={require("../../assets/icon/pokeball.png")}
-      style={{ width: 80, height: 80, top: -18 }}
+      source={require("../../assets/pokeball.png")}
+      style={{ width: 75, height: 75, top: -15 }}
     />
   );
 }
